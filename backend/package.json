@@ -1,0 +1,27 @@
+{
+  "name": "hrms-backend",
+  "version": "1.0.0",
+  "description": "Backend for Human Resource Management System (HRMS)",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "init-db": "node scripts/initDb.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^17.2.3",
+    "express": "^4.17.1",
+    "install": "^0.13.0",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "sqlite": "^4.0.19",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "author": "Your Name",
+  "license": "ISC"
+}
