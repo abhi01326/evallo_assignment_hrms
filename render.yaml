@@ -1,7 +1,7 @@
 services:
-  # ===========================
-  # BACKEND (Node.js API)
-  # ===========================
+  # =========================
+  # BACKEND (Node.js)
+  # =========================
   - type: web
     name: hrms-backend
     env: node
@@ -33,9 +33,9 @@ services:
     healthCheckPath: /api/health
     autoDeploy: true
 
-  # ===========================
-  # FRONTEND (React Static Site)
-  # ===========================
+  # =========================
+  # FRONTEND (Static React)
+  # =========================
   - type: web
     name: hrms-frontend
     env: static
@@ -45,4 +45,4 @@ services:
     branch: main
 
     buildCommand: npm ci && npm run build
-    publishPath: dist
+    staticPublishPath: dist
