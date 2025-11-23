@@ -44,9 +44,13 @@ export default function Logs() {
                     {new Date(row.timestamp).toLocaleString()}
                   </td>
                   <td className="py-2 align-top">{row.action}</td>
-                  <td className="py-2 align-top">{row.user_email || row.user_id || "-"}</td>
                   <td className="py-2 align-top">
-                    <pre className="whitespace-pre-wrap text-xs">{row.details}</pre>
+                    {row.user_email || row.user_id || "-"}
+                  </td>
+                  <td className="py-2 align-top">
+                    <pre className="whitespace-pre-wrap text-xs">
+                      {row.details}
+                    </pre>
                   </td>
                 </tr>
               ))

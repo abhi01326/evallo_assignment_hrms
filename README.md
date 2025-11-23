@@ -85,6 +85,7 @@ docker compose down
 ```
 
 Notes:
+
 - Backend exposes port `3000` (mapped to host `3000`).
 - Frontend is served by `nginx` on port `80` inside the container and mapped to host `5173` by the compose file.
 - The backend SQLite DB is stored in a Docker volume named `backend-data` (persisted between runs).
@@ -95,8 +96,7 @@ Deploying to a cloud provider:
 - Render / Railway / Fly / Heroku: can host the backend (Node) and optionally the frontend as a static site. Connect the repo and configure a service for the `backend` directory. For SQLite-based deployments, prefer persistent filesystem (Render has a persistent disk) or switch to a managed DB.
 - Docker-friendly hosts (DigitalOcean App Platform, Render via Docker, AWS ECS, Azure App Service with Docker): use the provided `Dockerfile`s and `docker-compose.yml` as a starting point.
 
-Render quick-deploy (recommended for backend)
---------------------------------------------
+## Render quick-deploy (recommended for backend)
 
 I recommend using Render to host the backend if you want a simple managed deployment with persistent disk options. Steps:
 
@@ -114,28 +114,29 @@ Once those secrets are set, the GitHub Actions workflow will automatically build
 I've included a sample `render.yaml` manifest in the repo to help set up services quickly.
 
 CI/CD ideas:
+
 - Create a GitHub Actions workflow to build and publish Docker images to GitHub Container Registry or Docker Hub, then deploy to your chosen host. Secrets (registry credentials, deployment tokens) will be required.
 
-Automatic build & deployment (GitHub Actions)
--------------------------------------------
+## Automatic build & deployment (GitHub Actions)
 
 This repository includes a GitHub Actions workflow at `.github/workflows/deploy.yml` that runs on pushes to `main` and does the following:
 
 - Builds Docker images for `backend` and `frontend` and pushes them to GitHub Container Registry (GHCR) as:
-   - `ghcr.io/<owner>/<repo>-backend:latest`
-   - `ghcr.io/<owner>/<repo>-frontend:latest`
+
+  - `ghcr.io/<owner>/<repo>-backend:latest`
+  - `ghcr.io/<owner>/<repo>-frontend:latest`
 
 - Builds the `frontend` using Vite and deploys the `dist` folder to GitHub Pages.
 
 Requirements / repository settings:
+
 - Ensure GitHub Pages is enabled for this repository (Pages will be served from the `gh-pages` deployment created by the action).
 - The workflow uses `GITHUB_TOKEN` to push images to GHCR; depending on your org settings you may need to enable `packages: write` permission for workflows in repository settings.
 
 Customizing the workflow:
+
 - To change image names or tags, edit `.github/workflows/deploy.yml`.
 - To deploy frontend elsewhere (Vercel/Netlify), remove the Pages job and set up the provider's GitHub integration or use provider-specific deploy actions.
-
-
 
 ## Contributing
 
