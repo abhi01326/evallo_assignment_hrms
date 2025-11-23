@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Employees from "./pages/Employees";
 import Teams from "./pages/Teams";
+import Logs from "./pages/Logs";
 import NavBar from "./components/NavBar";
 
 const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
@@ -34,6 +35,14 @@ export default function App() {
             element={
               <RequireAuth>
                 <Teams />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/logs"
+            element={
+              <RequireAuth>
+                <Logs />
               </RequireAuth>
             }
           />

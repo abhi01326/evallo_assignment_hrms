@@ -23,6 +23,9 @@ export default function NavBar() {
               <Link to="/teams" className="text-sm">
                 Teams
               </Link>
+              <Link to="/logs" className="text-sm">
+                Logs
+              </Link>
               <button onClick={logout} className="text-sm text-red-600">
                 Logout
               </button>

@@ -1,0 +1,20 @@
+# Node
+node_modules/
+**/node_modules/
+
+# Vite / build
+dist/
+.vite/
+
+# local env
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# SQLite DB
+**/src/db/hrms.db
+
+# Logs
+logs/
