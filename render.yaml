@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: hrms-backend
+    env: node
+    plan: free
+    buildCommand: 
+    startCommand: node src/index.js
+    repo: https://github.com/abhi01326/evallo_assignment_hrms
+    branch: main
+    rootDir: backend
+
+  - type: static
+    name: hrms-frontend
+    env: static
+    plan: free
+    repo: https://github.com/abhi01326/evallo_assignment_hrms
+    branch: main
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    publishPath: frontend/dist

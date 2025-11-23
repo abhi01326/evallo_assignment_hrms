@@ -95,6 +95,24 @@ Deploying to a cloud provider:
 - Render / Railway / Fly / Heroku: can host the backend (Node) and optionally the frontend as a static site. Connect the repo and configure a service for the `backend` directory. For SQLite-based deployments, prefer persistent filesystem (Render has a persistent disk) or switch to a managed DB.
 - Docker-friendly hosts (DigitalOcean App Platform, Render via Docker, AWS ECS, Azure App Service with Docker): use the provided `Dockerfile`s and `docker-compose.yml` as a starting point.
 
+Render quick-deploy (recommended for backend)
+--------------------------------------------
+
+I recommend using Render to host the backend if you want a simple managed deployment with persistent disk options. Steps:
+
+1. Sign in to Render and create a new Web Service.
+2. Connect your GitHub repo `abhi01326/evallo_assignment_hrms` and choose branch `main`.
+3. Set the service's root directory to `backend` and start command to `node src/index.js`.
+4. For persistent SQLite storage, enable a persistent disk on the service; otherwise switch to Postgres for production.
+5. Create a Render API key in your Render dashboard and copy it.
+6. In your GitHub repo settings, add repository secrets:
+   - `RENDER_API_KEY` = your Render API key
+   - `RENDER_SERVICE_ID` = the Render Service ID (from the service settings URL or API)
+
+Once those secrets are set, the GitHub Actions workflow will automatically build images and trigger a Render deploy on pushes to `main`.
+
+I've included a sample `render.yaml` manifest in the repo to help set up services quickly.
+
 CI/CD ideas:
 - Create a GitHub Actions workflow to build and publish Docker images to GitHub Container Registry or Docker Hub, then deploy to your chosen host. Secrets (registry credentials, deployment tokens) will be required.
 
