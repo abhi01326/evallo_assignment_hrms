@@ -46,6 +46,3 @@ services:
 
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
-
-    healthCheckPath: /
-    autoDeploy: true
