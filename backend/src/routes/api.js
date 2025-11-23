@@ -5,7 +5,7 @@ const teamsController = require("../controllers/teamsController");
 const authMiddleware = require("../middleware/authMiddleware");
 const assignmentModel = require("../models/assignmentModel");
 const logger = require("../utils/logger");
-const logsController = require('../controllers/logsController');
+const logsController = require("../controllers/logsController");
 
 // Employee Routes
 router.get(
@@ -98,6 +98,6 @@ router.delete(
 );
 
 // Logs
-router.get('/logs', authMiddleware.authenticateToken, logsController.getLogs);
+router.get("/logs", authMiddleware.authenticateToken, logsController.getLogs);
 
 module.exports = router;
