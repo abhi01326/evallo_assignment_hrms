@@ -26,14 +26,15 @@ services:
         generateValue: true
 
     disk:
-      name: hrms-disk
+      name: hrms-data
       mountPath: /data
-      sizeGb: 1
+      sizeGB: 1
 
     healthCheckPath: /api/health
+    autoDeploy: true
 
   # ===========================
-  # FRONTEND (Static React)
+  # FRONTEND (React Static Site)
   # ===========================
   - type: web
     name: hrms-frontend
