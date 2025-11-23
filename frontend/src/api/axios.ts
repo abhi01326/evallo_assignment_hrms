@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "https://evallo-assignment-hrms-1.onrender.com/" || "http://localhost:3000/api";
+const API_BASE = "https://evallo-assignment-hrms-1.onrender.com/api" ;
 
 const api = axios.create({
   baseURL: API_BASE,
