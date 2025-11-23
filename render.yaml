@@ -1,20 +1,47 @@
 services:
+  # ===========================
+  # BACKEND (Node.js API)
+  # ===========================
   - type: web
     name: hrms-backend
     env: node
     plan: free
-    buildCommand: 
-    startCommand: node src/index.js
+    rootDir: backend
     repo: https://github.com/abhi01326/evallo_assignment_hrms
     branch: main
-    rootDir: backend
 
-  - type: static
+    buildCommand: |
+      npm ci --unsafe-perm
+      npm run migrate || true
+      npm run seed || true
+
+    startCommand: node src/index.js
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_FILE
+        value: "/data/hrms.db"
+      - key: JWT_SECRET
+        generateValue: true
+
+    disk:
+      name: hrms-disk
+      mountPath: /data
+      sizeGb: 1
+
+    healthCheckPath: /api/health
+
+  # ===========================
+  # FRONTEND (Static React)
+  # ===========================
+  - type: web
     name: hrms-frontend
     env: static
     plan: free
+    rootDir: frontend
     repo: https://github.com/abhi01326/evallo_assignment_hrms
     branch: main
-    rootDir: frontend
+
     buildCommand: npm ci && npm run build
-    publishPath: frontend/dist
+    publishPath: dist
