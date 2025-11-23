@@ -67,6 +67,38 @@ The project is organized into three main directories: `backend`, `frontend`, and
 
 When you run `backend/npm run init-db` the script will seed a demo user and sample teams/employees. Use `admin@example.com` / `devpassword` to log in.
 
+## Hosting / Deployment
+
+Below are simple options to host this project. I added `Dockerfile`s and a `docker-compose.yml` so you can run the full stack locally or deploy the containers to any provider that supports Docker.
+
+Local Docker Compose (quick):
+
+```bash
+# build and start services
+docker compose up --build -d
+
+# view logs
+docker compose logs -f
+
+# stop services
+docker compose down
+```
+
+Notes:
+- Backend exposes port `3000` (mapped to host `3000`).
+- Frontend is served by `nginx` on port `80` inside the container and mapped to host `5173` by the compose file.
+- The backend SQLite DB is stored in a Docker volume named `backend-data` (persisted between runs).
+
+Deploying to a cloud provider:
+
+- Vercel: only for the frontend. Connect your GitHub repo to Vercel and it will detect the Vite app. Set `VITE_API_BASE` in Vercel environment variables to your backend URL.
+- Render / Railway / Fly / Heroku: can host the backend (Node) and optionally the frontend as a static site. Connect the repo and configure a service for the `backend` directory. For SQLite-based deployments, prefer persistent filesystem (Render has a persistent disk) or switch to a managed DB.
+- Docker-friendly hosts (DigitalOcean App Platform, Render via Docker, AWS ECS, Azure App Service with Docker): use the provided `Dockerfile`s and `docker-compose.yml` as a starting point.
+
+CI/CD ideas:
+- Create a GitHub Actions workflow to build and publish Docker images to GitHub Container Registry or Docker Hub, then deploy to your chosen host. Secrets (registry credentials, deployment tokens) will be required.
+
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
