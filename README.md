@@ -98,6 +98,26 @@ Deploying to a cloud provider:
 CI/CD ideas:
 - Create a GitHub Actions workflow to build and publish Docker images to GitHub Container Registry or Docker Hub, then deploy to your chosen host. Secrets (registry credentials, deployment tokens) will be required.
 
+Automatic build & deployment (GitHub Actions)
+-------------------------------------------
+
+This repository includes a GitHub Actions workflow at `.github/workflows/deploy.yml` that runs on pushes to `main` and does the following:
+
+- Builds Docker images for `backend` and `frontend` and pushes them to GitHub Container Registry (GHCR) as:
+   - `ghcr.io/<owner>/<repo>-backend:latest`
+   - `ghcr.io/<owner>/<repo>-frontend:latest`
+
+- Builds the `frontend` using Vite and deploys the `dist` folder to GitHub Pages.
+
+Requirements / repository settings:
+- Ensure GitHub Pages is enabled for this repository (Pages will be served from the `gh-pages` deployment created by the action).
+- The workflow uses `GITHUB_TOKEN` to push images to GHCR; depending on your org settings you may need to enable `packages: write` permission for workflows in repository settings.
+
+Customizing the workflow:
+- To change image names or tags, edit `.github/workflows/deploy.yml`.
+- To deploy frontend elsewhere (Vercel/Netlify), remove the Pages job and set up the provider's GitHub integration or use provider-specific deploy actions.
+
+
 
 ## Contributing
 
